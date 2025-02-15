@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crocodile Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .fact-container {
+            max-width: 600px;
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        #fact-display {
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+
+        #fact-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        #fact-button:hover {
+            transform: translateY(-5px);
+        }
+
+        .moving {
+            position: relative;
+            animation: moveButton 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes moveButton {
+            from { transform: translateX(0); }
+            to { transform: translateX(20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="fact-container">
+        <p id="fact-display">Click the button to see a crocodile fact!</p>
+    </div>
+    <button id="fact-button">Show Fact</button>
+    <script>
+        const facts = [
+            "Crocodiles are large aquatic reptiles that live throughout the tropics in Africa, Asia, the Americas, and Australia.",
+            "They are members of the order Crocodylia, which also includes alligators, caimans, and gharials.",
+            "Crocodiles have a V-shaped snout, while alligators have a U-shaped snout.",
+            "They are carnivorous and have a powerful bite, capable of crushing bones.",
+            "Crocodiles can live both in freshwater and saltwater environments.",
+            "They have a lifespan of 35 to 75 years, depending on the species.",
+            "Crocodiles are known for their stealth and patience, often waiting hours or even days for the perfect moment to attack prey.",
+            "They have a four-chambered heart, which is more similar to birds and mammals than to other reptiles.",
+            "Crocodiles communicate with each other through vocalizations, including growls, hisses, and roars.",
+            "They are excellent swimmers, using their tails to propel themselves through the water."
+        ];
+
+        let attempts = 0;
+        const factDisplay = document.getElementById('fact-display');
+        const factButton = document.getElementById('fact-button');
+
+        factButton.addEventListener('mouseover', () => {
+            if (attempts < 3) {
+                factButton.classList.add('moving');
+            }
+        });
+
+        factButton.addEventListener('click', () => {
+            attempts++;
+            if (attempts >= 3) {
+                factButton.classList.remove('moving');
+            }
+            const randomFact = facts[Math.floor(Math.random() * facts.length)];
+            factDisplay.textContent = randomFact;
+        });
+    </script>
+</body>
+</html>
